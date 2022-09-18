@@ -3,7 +3,6 @@ import { useState } from "react";
 
 const Todo = ({ task, onDelete, onEdit }) => {
   const [title, setText] = useState(task.title);
-  //const [category, setCategory] = useState(task.category_title);
   const [showEditTask, setShowEditTask] = useState(false);
 
   const showHideEdit = () => {
@@ -27,9 +26,7 @@ const Todo = ({ task, onDelete, onEdit }) => {
           </div>
         </div>
       )}
-      {/*    {showEditTask && (
-        <Button text="Zatvori" cssStyle="btn" onClick={showHideEdit} />
-      )} */}
+
       <div className="buttons">
         {showEditTask ? (
           <>

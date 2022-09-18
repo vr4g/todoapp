@@ -44,12 +44,6 @@ function App() {
     return jsonResponse;
   };
 
-  /*   const addTodo = (task) => {
-    const id = Math.floor(Math.random() * 1000) + 1;
-    const newTask = { id, ...task };
-    setTasks([...tasks, newTask]);
-  }; */
-
   const deleteTask = async (id) => {
     if (!window.confirm("Da li ste sigurni?")) {
       return;
@@ -68,13 +62,6 @@ function App() {
     console.log(JSON.stringify(jsonResponse));
     return jsonResponse;
   };
-
-  /*   const deleteTask = (id) => {
-    if (!window.confirm("Da li ste sigurni?")) {
-      return;
-    }
-    setTasks(tasks.filter((task) => task.id !== id));
-  }; */
 
   const editTask = async (id, newText) => {
     const recordBodyParameters = {
@@ -96,16 +83,6 @@ function App() {
     console.log(JSON.stringify(jsonResponse));
     return jsonResponse;
   };
-
-  /*   const editTask = (id, newText) => {
-    if (!newText) {
-      alert("Unos ne smije biti prazan!");
-      return;
-    }
-    setTasks(
-      tasks.map((todo) => (todo.id === id ? { ...tasks, text: newText } : todo))
-    );
-  }; */
 
   return (
     <div className="App">
