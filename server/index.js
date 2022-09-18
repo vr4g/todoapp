@@ -8,7 +8,7 @@ require("dotenv").config();
 
 let pool = new Pool();
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5000;
 
 app.use(
   bodyParser.urlencoded({
