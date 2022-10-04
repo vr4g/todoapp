@@ -1,9 +1,9 @@
 :root {
   --light: #ededeb;
-  --background: #a4b0a3;
+  --background: rgb(36, 44, 44);
   --primary: #9b4f73;
   --secondary: #8ca499;
-  --gray: #3e4045;
+  --gray: #d3d6dd;
 }
 
 * {
@@ -30,132 +30,75 @@ code {
   margin: auto;
   width: 50%;
   height: 100px;
-  border-bottom: 1px solid black;
   color: var(--gray);
   justify-content: center;
   align-items: center;
 }
 
-.card {
-  padding: 0px;
-  min-height: 60px;
-  border-radius: 5px;
-  /* box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); */
-}
-
-.dropdown-style {
-  border-radius: 20px;
-  padding: 2px 5px;
-  font-size: 0.8rem;
-}
-
 .container {
   margin: auto;
   padding: 5px;
-  margin-top: 50px;
+  margin-top: 20px;
   width: 50%;
   border-radius: 20px;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
 }
 
-.todo-style {
+.splash-screen {
   display: flex;
-  width: 100%;
-  margin: 8px 0px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-image: radial-gradient(rgb(80, 80, 100), black);
+  height: 100vh;
 }
 
-.form-input {
-  width: 100%;
-  padding: 0 10px;
-  margin: 0 5px;
-  height: 30px;
-  border-radius: 30px;
-  border: 2px solid #8ca499;
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
-.form-bt {
-  display: flex;
-  justify-content: space-between;
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 280px;
+  }
 }
 
-/* Buttons */
-.btn {
-  width: 90px;
-  min-width: 90px;
-  height: 30px;
-  margin: 0 5px;
-  border-radius: 10px;
-  border: 0.5px solid var(--light);
-  background-color: #3e4045;
-  color: #ededeb;
-  text-transform: uppercase;
-  font-size: 0.8rem;
-  font-weight: bold;
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: rgb(0, 250, 0);
+  }
 }
 
-.btn:hover {
-  background-color: var(--primary);
+.main-text {
+  font-size: 3rem;
   color: black;
-  cursor: pointer;
-  transition: 0.5s;
-}
-
-.buttons {
-  width: 110px;
-}
-
-.delete-btn {
-  background-color: rgb(200, 0, 0);
-  margin-bottom: 5px;
-  color: white;
-  text-transform: uppercase;
   font-weight: bold;
-}
-.delete-btn:hover {
-  transition: 1s;
-  background-color: red;
-  color: white;
-  text-transform: uppercase;
-  font-weight: bold;
-}
-
-/* Tasks */
-
-.task-text {
-  text-transform: uppercase;
-  font-size: 0.8rem;
-  letter-spacing: 0.1rem;
-  font-weight: bold;
-}
-
-.task-container {
-  display: block;
-  padding: 10px;
-  width: 100%;
-  border: 0.5px solid rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-}
-
-.category-text {
-  font-size: 0.8rem;
-}
-
-/* Edit */
-
-.edit-input {
-  padding: 15px;
-  background-color: transparent;
-  border-radius: 10px;
-  background-color: rgba(250, 0, 0, 0.2);
-  border: none;
-}
-
-textarea {
-  width: 100%;
-  max-width: 100%;
   overflow: hidden;
-  padding: 0;
-  outline: none;
+  border-right: 0.15em solid red;
+  color: white;
+  white-space: nowrap;
+  letter-spacing: 0.1em;
+  animation: typing 1s steps(9), blink-caret 0.5s step-end infinite;
+}
+
+.leading-text {
+  transform: translateY(15px);
+  margin-left: 15px;
+  font-size: 1.5 rem;
+  color: lightgray;
+  animation: fadeIn 4s;
 }
 
 @media screen and (max-width: 600px) {

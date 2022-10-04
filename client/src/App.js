@@ -4,25 +4,29 @@ import TodoList from "./components/TodoList";
 import { useEffect, useState } from "react";
 
 function App() {
-  const addRecordEndpoint = "/postTask";
-  const deleteRecordEndpoint = "/deleteTask";
-  const updateRecordEndpoint = "/updateTask";
-
   const [tasks, setTasks] = useState([{}]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [triggerRefresh, setTriggerRefresh] = useState(false);
 
   useEffect(() => {
-    async function fetchData() {
-      const response = await fetch("/tasks");
-      if (!response.ok) {
-        console.log("Cannot fetch");
-      }
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
+  }, []);
 
-      const data = await response.json();
-      setTasks(data);
+  async function fetchData() {
+    const response = await fetch("/task");
+    if (!response.ok) {
+      console.log("Cannot fetch");
     }
 
+    const data = await response.json();
+    setTasks(data);
+  }
+
+  useEffect(() => {
     fetchData();
-  });
+  }, [triggerRefresh]);
 
   const addTask = async (task) => {
     const recordBodyParameters = {
@@ -37,10 +41,11 @@ function App() {
       },
       body: JSON.stringify(recordBodyParameters),
     };
+    setTriggerRefresh((current) => !current);
 
-    const response = await fetch(addRecordEndpoint, options);
+    const response = await fetch("/task", options);
     const jsonResponse = await response.json();
-    console.log(JSON.stringify(jsonResponse));
+
     return jsonResponse;
   };
 
@@ -57,9 +62,9 @@ function App() {
       body: JSON.stringify({ id: id }),
     };
 
-    const response = await fetch(deleteRecordEndpoint, options);
+    const response = await fetch("/task/:id", options);
     const jsonResponse = await response.json();
-    console.log(JSON.stringify(jsonResponse));
+    setTriggerRefresh((current) => !current);
     return jsonResponse;
   };
 
@@ -67,9 +72,7 @@ function App() {
     const recordBodyParameters = {
       id: id,
       title: newText,
-      category_id: 1,
     };
-
     const options = {
       method: "PUT",
       headers: {
@@ -77,19 +80,39 @@ function App() {
       },
       body: JSON.stringify(recordBodyParameters),
     };
-
-    const response = await fetch(updateRecordEndpoint, options);
-    const jsonResponse = await response.json();
-    console.log(JSON.stringify(jsonResponse));
-    return jsonResponse;
+    const response = await fetch("/task/:id", options);
+    return response.json();
   };
 
-  return (
+  const filterTasks = async (category_id) => {
+    category_id === 0 && fetchData();
+    const response = await fetch(
+      `http://localhost:5000/task/filter?category_id=${category_id}`
+    );
+    if (!response.ok) {
+      console.log("Cannot fetch");
+    }
+    const data = await response.json();
+    setTasks(data);
+  };
+
+  return isLoading ? (
+    <div className="splash-screen">
+      <h1 className="main-text">To-Do APP</h1>
+      <span className="leading-text">made by Damjan Petričević</span>
+    </div>
+  ) : (
     <div className="App">
-      <Header title="To Do List" />
+      <Header title="My custom to-do list" />
       <div className="container">
         <div>
-          <AddTodo onAdd={addTask} />
+          <AddTodo
+            onAdd={addTask}
+            fetchAll={() => {
+              fetchData();
+            }}
+            filterTasks={filterTasks}
+          />
         </div>
         <TodoList tasks={tasks} onDelete={deleteTask} onEdit={editTask} />
       </div>

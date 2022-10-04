@@ -1,0 +1,91 @@
+.btn {
+  width: 90px;
+  min-width: 90px;
+  height: 30px;
+  margin: 0 5px;
+  border-radius: 10px;
+  border: 0.5px solid var(--light);
+  background-color: #3e4045;
+  color: #ededeb;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.btn:hover {
+  background-color: var(--primary);
+  color: black;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.dropdown {
+  border-radius: 7px;
+  height: 40px;
+  padding: 8px 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background: #34495e;
+
+  font-size: 1.1rem;
+}
+
+.dropdown:hover {
+  background: #2980b9;
+  cursor: pointer;
+}
+
+.formInput {
+  width: 100%;
+  padding: 0 15px;
+  margin: 0 5px;
+  height: 40px;
+  background-color: #2980b9;
+  color: white;
+  font-size: 1.2rem;
+  border-radius: 30px;
+  border: none;
+}
+
+.formInput::placeholder {
+  color: white;
+}
+
+.formInput:focus {
+  background-color: white;
+  outline: none;
+  color: black;
+}
+
+.formBt {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.addButton {
+  margin-left: 5px;
+  min-width: 40px;
+  min-height: 40px;
+  color: white;
+}
+
+.addButton:hover {
+  cursor: pointer;
+  color: greenyellow;
+  transition: 0.7s;
+  scale: 1.2;
+}
+
+.filterBtns {
+  margin: 10px 0;
+  display: flex;
+  width: 90%;
+  justify-content: space-evenly;
+}
+
+h3 {
+  color: white;
+}

@@ -1,43 +1,43 @@
-import Button from "./Button";
 import { useState } from "react";
+import Style from "./todo.module.css";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import CloseIcon from "@mui/icons-material/Close";
+import SaveIcon from "@mui/icons-material/Save";
 
 const Todo = ({ task, onDelete, onEdit }) => {
   const [title, setText] = useState(task.title);
   const [showEditTask, setShowEditTask] = useState(false);
 
   const showHideEdit = () => {
+    setText(task.title);
     setShowEditTask((current) => !current);
   };
 
   return (
-    <div className="todo-style">
+    <div className={Style.todoStyle}>
       {showEditTask ? (
         <textarea
           type="textarea"
-          className="edit-input task-text"
+          className={`${(Style.taskText, Style.txtArea)}`}
           value={title}
           onChange={(e) => setText(e.target.value)}
         />
       ) : (
-        <div className="task-container">
-          <span className="task-text">{task.title}</span>
+        <div className={Style.taskContainer}>
+          <span className={Style.taskText}>{title}</span>
           <div>
-            <span className="category-text">{task.category_title}</span>
+            <span className={Style.categoryText}>{task.category_title}</span>
           </div>
         </div>
       )}
 
-      <div className="buttons">
+      <div className={Style.buttons}>
         {showEditTask ? (
           <>
-            <Button
-              text="Zatvori"
-              cssStyle="delete-btn btn"
-              onClick={showHideEdit}
-            />
-            <Button
-              text="Spremi"
-              cssStyle="btn"
+            <CloseIcon onClick={showHideEdit} className={Style.deleteIcon} />
+            <SaveIcon
+              className={Style.editIcon}
               onClick={() => {
                 onEdit(task.id, title);
                 setShowEditTask((current) => !current);
@@ -46,12 +46,11 @@ const Todo = ({ task, onDelete, onEdit }) => {
           </>
         ) : (
           <>
-            <Button
-              text="Obriši"
-              cssStyle="delete-btn btn"
+            <DeleteIcon
               onClick={() => onDelete(task.id)}
+              className={Style.deleteIcon}
             />
-            <Button text="Uredi" cssStyle="btn" onClick={showHideEdit} />
+            <EditIcon onClick={showHideEdit} className={Style.editIcon} />
           </>
         )}
       </div>
