@@ -41,11 +41,10 @@ function App() {
       },
       body: JSON.stringify(recordBodyParameters),
     };
-    setTriggerRefresh((current) => !current);
 
     const response = await fetch("/task", options);
     const jsonResponse = await response.json();
-
+    setTriggerRefresh((current) => !current);
     return jsonResponse;
   };
 
@@ -59,10 +58,9 @@ function App() {
         Accept: "application/form-data",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ id: id }),
     };
 
-    const response = await fetch("/task/:id", options);
+    const response = await fetch(`/task/${id}`, options);
     const jsonResponse = await response.json();
     setTriggerRefresh((current) => !current);
     return jsonResponse;

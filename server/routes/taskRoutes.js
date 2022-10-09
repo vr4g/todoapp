@@ -7,6 +7,7 @@ const {
   deleteTask,
   updateTask,
   filterTasks,
+  checkTask,
 } = require("../models/task");
 
 const app = express();
@@ -21,6 +22,7 @@ router.get("/task", getTasks);
 router.post("/task", bodyParser.json(), addTask);
 router.delete("/task/:id", bodyParser.json(), deleteTask);
 router.put("/task/:id", bodyParser.json(), updateTask);
+router.put("/task/check/:id", bodyParser.json(), checkTask);
 router.get("/task/filter", filterTasks);
 
 module.exports = router;

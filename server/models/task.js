@@ -33,7 +33,7 @@ deleteTask = (req, res) => {
   try {
     pool.connect(async (err, client, release) => {
       let resp = await client.query(`DELETE FROM todo WHERE (id) = $1`, [
-        req.body.id,
+        req.params.id,
       ]);
       res.json(resp.rows);
       release();
@@ -49,6 +49,7 @@ addTask = (req, res) => {
         `INSERT INTO todo (title, category_id) VALUES ($1, $2)`,
         [req.body.title, req.body.category_id]
       );
+      res.json(resp.rows);
       release();
     });
   } catch (err) {
@@ -63,6 +64,7 @@ updateTask = (req, res) => {
         `UPDATE todo Set title = $1 WHERE id = $2`,
         [req.body.title, req.body.id]
       );
+      res.json(resp.rows);
       release();
     });
   } catch (err) {
@@ -70,4 +72,26 @@ updateTask = (req, res) => {
   }
 };
 
-module.exports = { getTasks, addTask, updateTask, deleteTask, filterTasks };
+checkTask = (req, res) => {
+  try {
+    pool.connect(async (err, client, release) => {
+      let resp = await client.query(
+        `UPDATE todo Set checked = $1 WHERE id = $2`,
+        [req.body.checked, req.body.id]
+      );
+      res.json(resp.rows);
+      release();
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+module.exports = {
+  getTasks,
+  addTask,
+  updateTask,
+  deleteTask,
+  filterTasks,
+  checkTask,
+};
